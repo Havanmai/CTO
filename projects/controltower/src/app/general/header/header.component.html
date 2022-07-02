@@ -1,0 +1,228 @@
+<div class="header-wr">
+  <div nz-row>
+    <div *ngIf="!checksearch" class="logo-header" nz-col nzXs="12" nzSm="10" nzMd="8" nzLg="8" nzXl="6" nzXXl="6">
+      <span class="bread_menu mr-2">
+        <button nz-button nzType="text" (click)="tonggleMenu()">
+          <i nz-icon nzType="menu" nzTheme="outline" style="color: #223b55"></i>
+        </button>
+      </span>
+      <span class="logo" (click)="gotohome()">
+        <img src="/assets/logo.svg" />
+      </span>
+    </div>
+    <div *ngIf="checksearch"  class="arrow-left" nz-col nzXs="6" nzSm="4" nzMd="4" nzLg="4" nzXl="4" nzXXl="4" (click)="searchMobile()">
+      <i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+    </div>
+    <div
+    *ngIf="!checksearch"
+      nz-col
+      nzXs="2"
+      nzSm="6"
+      nzMd="8"
+      nzLg="10"
+      nzXl="13"
+      nzXXl="14"
+      class="text-right"
+      id="inputSearchland"
+    >
+      <div nz-row>
+        <div nz-col nzXs="12">
+          <div class="input-search d-none d-md-none d-lg-none d-xl-inline-block d-xxl-inline-block" style="width:100%;">
+            <nz-input-group nzSize="large" [nzSuffix]="suffixIcon" >
+              <input
+                id="inputSearch"
+                placeholder="Tìm kiếm"
+                nz-input
+                [(ngModel)]="inputValue"
+                (ngModelChange)="onChange($event)"
+                [nzAutocomplete]="auto"
+              />
+            </nz-input-group>
+            <ng-template #suffixIcon>
+              <i nz-icon nzType="search"></i>
+            </ng-template>
+            <nz-autocomplete #auto>
+              <nz-auto-optgroup
+                *ngFor="let group of filteredOptions"
+                [nzLabel]="groupTitle"
+              >
+                <ng-template #groupTitle>
+                  <h5 class="mt-2" nz-typography>
+                    {{ group.title }}
+                  </h5>
+                </ng-template>
+                <nz-auto-option
+                  [nzValue]="inputmenu"
+                  [nzLabel]="labelmenu"
+                  *ngIf="group.title === 'Menu'; else noMenu"
+                >
+                  <nz-tag
+                    class="tag-menu py-2 px-2"
+                    *ngFor="let option of group.resultSearch"
+                    (click)="directionalSearchMenu(option)"
+                    nzColor="error"
+                    ><span style="font-size: 14px">{{
+                      option.title
+                    }}</span></nz-tag
+                  >
+                </nz-auto-option>
+                <ng-template #noMenu>
+                  <nz-auto-option
+                    *ngFor="let option of group.resultSearch"
+                    (click)="
+                      directionalSearchNoMenu(group.routerLink, option.id)
+                    "
+                    [nzLabel]="option.code"
+                    [nzValue]="option.id"
+                  >
+                    {{ option.code?(option.tilte?option.code.concat(' - ',option.tilte):option.code):'' }}
+                  </nz-auto-option>
+                </ng-template>
+              </nz-auto-optgroup>
+            </nz-autocomplete>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+    *ngIf="checksearch"
+    nz-col
+    nzXs="18"
+    nzSm="20"
+    nzMd="20"
+    nzLg="20"
+    nzXl="20"
+    nzXXl="20"
+    class="text-right"
+  >
+    <!-- <div nz-row>
+      <div nz-col nzXs="12"> -->
+        <div class="input-search" style="width:100%;">
+          <nz-input-group nzSize="large" [nzSuffix]="suffixIcon" style="width:100%;">
+            <input
+            style="width:100%;"
+              id="inputSearch1"
+              placeholder="Tìm kiếm"
+              nz-input
+              [(ngModel)]="inputValue"
+              (ngModelChange)="onChange($event)"
+              [nzAutocomplete]="auto"
+            />
+          </nz-input-group>
+          <ng-template #suffixIcon>
+            <i nz-icon nzType="search"></i>
+          </ng-template>
+          <nz-autocomplete #auto>
+            <nz-auto-optgroup
+              *ngFor="let group of filteredOptions"
+              [nzLabel]="groupTitle"
+            >
+              <ng-template #groupTitle>
+                <h5 class="mt-2" nz-typography>
+                  {{ group.title }}
+                </h5>
+              </ng-template>
+              <nz-auto-option
+                [nzValue]="inputmenu"
+                [nzLabel]="labelmenu"
+                *ngIf="group.title === 'Menu'; else noMenu"
+              >
+                <nz-tag
+                  class="tag-menu py-2 px-2"
+                  *ngFor="let option of group.resultSearch"
+                  (click)="directionalSearchMenu(option)"
+                  nzColor="error"
+                  ><span style="font-size: 14px">{{
+                    option.title
+                  }}</span></nz-tag
+                >
+              </nz-auto-option>
+              <ng-template #noMenu>
+                <nz-auto-option
+                  *ngFor="let option of group.resultSearch"
+                  (click)="
+                    directionalSearchNoMenu(group.routerLink, option.id)
+                  "
+                  [nzLabel]="option.code"
+                  [nzValue]="option.id"
+                >
+                  {{ option.code?(option.tilte?option.code.concat(' - ',option.tilte):option.code):'' }}
+                </nz-auto-option>
+              </ng-template>
+            </nz-auto-optgroup>
+          </nz-autocomplete>
+       <!--  </div>
+      </div> -->
+    </div>
+  </div>
+    <div
+      nz-col
+      nzXs="10"
+      nzSm="8"
+      nzMd="8"
+      nzLg="6"
+      nzXl="5"
+      nzXXl="4"
+      class="text-right header-right"
+      *ngIf="!checksearch"
+    >
+    <button nz-button nzType="text" class="mr-3 search-icon   d-inline-block d-xl-none d-xxl-none" title="Tìm kiếm" cla (click)="searchAll()">
+      <i nz-icon nzType="search" nzTheme="outline"></i>
+    </button>
+     <!--  <button  class="searchevent" nz-button nzType="text" class="mr-1" title="Hướng dẫn sử dụng">
+        <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+      </button>
+      <button class="searchevent" nz-button nzType="text" class="mr-3" title="Thông báo">
+        <i nz-icon nzType="bell" nzTheme="outline"></i>
+      </button>
+      <button  class="searchevent" nz-button nzType="text" class="mr-3" title="Cài đặt">
+        <i nz-icon nzType="setting" nzTheme="outline"></i>
+      </button> -->
+      <button
+
+        nz-button
+        nz-button
+        nz-dropdown
+        [nzDropdownMenu]="menu"
+        class="avatar-menu searchevent"
+      >
+        <nz-avatar
+          [nzText]="'CT'"
+          [nzSize]="26"
+          class="user-avatar"
+          style="background-color: #87d068"
+        ></nz-avatar>
+        <span class="username d-none d-md-none d-lg-none ml-2">
+          Control Tower Viettel Post</span>
+      </button>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <ul nz-menu nzSelectable>
+          <li  nz-menu-item>
+            <div class="user-info px-3 py-1">
+
+              <nz-avatar
+                [nzSize]="56"
+                class="menu-avatar-text"
+                nzIcon="user"
+                style="background-color: #87d068"
+              ></nz-avatar>
+              <div>
+                <h5 nz-typography class="truncate name-user">
+                  Control Tower Viettel Post
+                </h5>
+                <span nz-typography vType="secondary" class="email"> admin@ctw.viettelpost.vn</span>
+              </div>
+            </div>
+          </li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item class="py-3" (click)="logout()">
+            <span class="px-3"
+              ><i nz-icon nzType="logout" nzTheme="outline" class="mr-3"></i
+              >Đăng xuất</span
+            >
+          </li>
+        </ul>
+      </nz-dropdown-menu>
+   </div>
+  </div>
+</div>

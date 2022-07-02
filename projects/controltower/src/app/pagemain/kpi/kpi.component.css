@@ -1,0 +1,19 @@
+.text-center{
+  text-align: center;
+}
+
+.with-table{
+ width: 180px!important;
+}
+
+.width-full{
+  width: 100%;
+}
+
+.fixrow:hover{
+  background-color: rgba(251, 221, 228, 0.3);
+}
+
+.fixcolumn:hover{
+  background-color: rgba(251, 221, 228, 0.3);
+}

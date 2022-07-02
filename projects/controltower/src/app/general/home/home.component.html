@@ -1,0 +1,36 @@
+<nz-layout>
+  <nz-header>
+    <cms-header></cms-header>
+  </nz-header>
+  <nz-layout>
+    <nz-sider
+      nzWidth="250px"
+      nzTheme="light"
+      [(nzCollapsed)]="isCollapsed"
+      nzBreakpoint="lg"
+      [nzCollapsedWidth]="0"
+      class="vertical-submenu"
+    >
+      <cms-sidebar></cms-sidebar>
+    </nz-sider>
+    <nz-layout
+      [ngClass]="{
+        'inner-layout': true,
+        'px-2': true,
+        'pb-0': true,
+        'inner-layout-collapse': isCollapsed
+      }"
+    >
+      <cms-breadcrumb></cms-breadcrumb>
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+      <nz-footer class="text-center"
+        ><span nz-typography nzType="secondary"
+          >©2021 by ViettelPost Control Tower</span
+        ></nz-footer
+      >
+    </nz-layout>
+  </nz-layout>
+</nz-layout>
+

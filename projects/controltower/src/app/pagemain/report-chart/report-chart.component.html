@@ -1,0 +1,23 @@
+<cms-page title="Tổng quan" [close]="false">
+  <div action>
+   <!--  <div style="width:200px; float: right;">
+      <app-date-selector (onSelect)="filterSelect($event)"></app-date-selector>
+    </div> -->
+  </div>
+  <div content class="mt-9">
+
+    <nz-tabset>
+      <nz-tab nzTitle="Báo cáo tỉ lệ đúng toàn trình">
+        <ng-template nz-tab>
+          <app-kpi-overall></app-kpi-overall>
+        </ng-template>
+
+      </nz-tab>
+      <nz-tab nzTitle="Báo cáo tỉ lệ đúng phân đoạn">
+        <ng-template nz-tab>
+          <app-kpi-segment></app-kpi-segment>
+        </ng-template>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</cms-page>

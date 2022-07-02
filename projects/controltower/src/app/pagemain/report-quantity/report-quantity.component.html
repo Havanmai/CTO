@@ -1,0 +1,22 @@
+<cms-page title="Báo cáo sản lượng" [close]="false">
+  <div action>
+   <!--  <div style="width:200px; float: right;">
+      <app-date-selector (onSelect)="filterSelect($event)"></app-date-selector>
+    </div> -->
+  </div>
+  <div content class="mt-9">
+
+    <nz-tabset>
+      <nz-tab nzTitle="Báo cáo sản lượng theo ngày">
+        <ng-template nz-tab>
+          <app-quantity-days></app-quantity-days>
+        </ng-template>
+
+      </nz-tab>
+      <nz-tab nzTitle="Báo cáo sản lượng theo tháng">
+        <ng-template nz-tab>
+          <app-quantity-months></app-quantity-months>
+        </ng-template>
+      </nz-tab>
+    </nz-tabset>
+  </div>

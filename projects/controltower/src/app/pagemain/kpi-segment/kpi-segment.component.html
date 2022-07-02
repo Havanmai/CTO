@@ -1,0 +1,246 @@
+<cms-page title="Báo cáo chi tiết KPI phân đoạn " [close]="false">
+  <div action>
+   <!--  <div style="width:200px; float: right;">
+      <app-date-selector (onSelect)="filterSelect($event)"></app-date-selector>
+    </div> -->
+
+  </div>
+  <div content >
+    <div nz-row class="mt-7" [nzGutter]="[16, 5]">
+      <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-input-group class="width-full" [nzPrefix]="prefixIconSearch" [nzSuffix]="inputClearTpl">
+          <input type="text" nz-input placeholder="Nhập mã đơn hàng để tìm kiếm" [(ngModel)]="keyword"
+            (keyup.enter)="searchKeyWord()" />
+        </nz-input-group>
+        <ng-template #prefixIconSearch>
+          <i nz-icon nzType="search" (click)="searchKeyWord()"></i>
+        </ng-template>
+        <ng-template #inputClearTpl>
+          <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="keyword"
+            (click)="keyword = ''; searchKeyWord()"></i>
+        </ng-template>
+      </div>
+
+      <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-input-group class="width-full" [nzPrefix]="prefixIconSearch1" [nzSuffix]="inputClearTpl1">
+          <input type="text" nz-input placeholder="Nhập mã khách hàng" [(ngModel)]="codeKH"
+            (keyup.enter)="searchKeyWordKH()" />
+        </nz-input-group>
+        <ng-template #prefixIconSearch1>
+          <i nz-icon nzType="user" (click)="searchKeyWordKH()"></i>
+        </ng-template>
+        <ng-template #inputClearTpl1>
+          <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="codeKH"
+            (click)="codeKH = ''; searchKeyWordKH()"></i>
+        </ng-template>
+      </div>
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <app-date-selector (onSelect)="filterSelect($event)"></app-date-selector>
+       <!-- <nz-range-picker [nzAllowClear] nzFormat="yyyy/MM/dd" ngModel (ngModelChange)="onChange($event)" [nzPlaceHolder]="['Lọc theo thời gian']"></nz-range-picker> -->
+      </div>
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="serviceId"  nzPlaceHolder="Lọc theo mã dịch vụ" nzAllowClear (ngModelChange)="servicechange($event)">
+          <nz-option *ngFor="let o of listOfSP" [nzValue]="o.mabc" [nzLabel]="o.mabc.concat(' - ',o.tenbc)"></nz-option>
+        </nz-select>
+      </div>
+     <!--  <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="postId"  nzPlaceHolder="Lọc theo mã đối tác" nzAllowClear (ngModelChange)="postchange($event)">
+          <nz-option *ngFor="let o of listOfPost" [nzValue]="o.maBuuCuc" [nzLabel]="o.maBuuCuc.concat(' - ',o.tenBuuCuc)"></nz-option>
+        </nz-select>
+      </div> -->
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="postRCId"  nzPlaceHolder="Lọc theo bưu cục nhận" nzAllowClear (ngModelChange)="postRCchange($event)">
+          <nz-option *ngFor="let o of listOfPost" [nzValue]="o.mabc" [nzLabel]="o.mabc.concat(' - ',o.tenbc)"></nz-option>
+        </nz-select>
+      </div>
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="chinhanhRCId"  nzPlaceHolder="Lọc theo chi nhánh nhận" nzAllowClear (ngModelChange)="chinhanhRCchange($event)">
+          <nz-option *ngFor="let o of listOfTinh" [nzValue]="o.key" [nzLabel]="o.key.concat(' - ',o.value)"></nz-option>
+        </nz-select>
+      </div>
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="postSEId"  nzPlaceHolder="Lọc theo bưu cục giao" nzAllowClear (ngModelChange)="postSEchange($event)">
+          <nz-option *ngFor="let o of listOfPost" [nzValue]="o.mabc" [nzLabel]="o.mabc.concat(' - ',o.tenbc)"></nz-option>
+        </nz-select>
+      </div>
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="chinhanhSEId"  nzPlaceHolder="Lọc theo chi nhánh giao" nzAllowClear (ngModelChange)="chinhanhSEchange($event)">
+          <nz-option *ngFor="let o of listOfTinh" [nzValue]="o.key" [nzLabel]="o.key.concat(' - ',o.value)"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="loaidonId" nzPlaceHolder="Lọc theo loại đơn" nzAllowClear (ngModelChange)="loaidonchange($event)"
+          >
+          <nz-option nzValue="Nội kho" nzLabel="Nội kho"></nz-option>
+          <nz-option nzValue="Nội tỉnh" nzLabel="Nội tỉnh"></nz-option>
+          <nz-option nzValue="Nội vùng" nzLabel="Nội vùng"></nz-option>
+          <nz-option nzValue="Cận vùng" nzLabel="Cận vùng"></nz-option>
+          <nz-option nzValue="Liên vùng" nzLabel="Liên vùng"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col class="mt-3" nzXs="12" nzSm="11" nzMd="10" nzLg="9" nzXl="4" nzXXl="4">
+        <button nz-button nzType="primary" (click)="btnSearch()"class="mr-3">
+          <i nz-icon nzType="search" nzTheme="outline"></i>Tìm kiếm
+        </button>
+      </div>
+    </div>
+    <div *ngIf="ratio" nz-row class="mt-5">
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <span *ngIf="ratio.tyLeFm" nz-typography style="color: rgb(17, 118, 233);">Tỉ lệ đúng phân đoạn FM: {{ratio.tyLeFm}}%</span>
+      </div>
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <span *ngIf="ratio.tyLeMm" nz-typography style="color: rgb(17, 118, 233);">Tỉ lệ đúng phân đoạn MM : {{ratio.tyLeMm}}%</span>
+      </div>
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <span *ngIf="ratio.tyLeLm" nz-typography style="color: rgb(17, 118, 233);">Tỉ lệ đúng phân đoạn LM : {{ratio.tyLeLm}}%</span>
+      </div>
+    </div>
+    <nz-table class="mt-5"
+    nzShowSizeChanger
+    [nzData]="listOfData"
+    [nzFrontPagination]="false"
+    [nzPageSize]="size"
+    [nzPageIndex]="page"
+    [nzTotal]="total"
+    (nzPageIndexChange)="pageChange($event)"
+    (nzQueryParams)="onQueryParamsChange($event)"
+    [nzFooter]="footer" [nzScroll]="{ x: '8000px', y: '490px' }">
+    <thead>
+      <tr>
+        <!-- <th colspan="13">
+
+        </th> -->
+        <th rowspan="2" class="text-center" nzLeft>Mã đơn hàng</th>
+        <th rowspan="2" class="text-center" nzLeft>Mã đối tác</th>
+        <th rowspan="2" class="text-center">Mã khách hàng</th>
+        <th rowspan="2" class="text-center">Mã dịch vụ</th>
+        <th rowspan="2" class="text-center">Loại đơn</th>
+        <th rowspan="2" class="text-center">Loại hàng hóa</th>
+        <th rowspan="2" class="text-center">Trạng thái hiện tại</th>
+        <th rowspan="2" class="text-center">Nhóm dịch vụ</th>
+        <th rowspan="2" class="text-center">Bưu cục nhận</th>
+        <th rowspan="2" class="text-center">Chi nhánh nhận</th>
+        <th rowspan="2" class="text-center">Bưu cục hiện tại</th>
+        <th rowspan="2" class="text-center">Chi nhánh hiện tại</th>
+        <th rowspan="2" class="text-center">Bưu cục giao</th>
+        <th rowspan="2" class="text-center">Chi nhánh giao</th>
+        <th colspan="5">
+          Khâu First Mile(FM)
+        </th>
+        <th colspan="5">
+          Khâu Midle Mile(MM)
+        </th>
+        <th colspan="5">
+          Khâu Last Mile(LM)
+        </th>
+      <!--   <th colspan="3">
+          Toàn trình
+        </th> -->
+      </tr>
+      <tr>
+
+
+        <th class="text-center">Thời gian nhập doanh thu</th>
+        <th class="text-center" > Thời gian xuất trung chuyển tại BCG</th>
+        <th class="text-center">Thời gian thực tế phân đoạn FM </th>
+        <th class="text-center">Chênh lệch thời gian phân đoạn FM</th>
+        <th class="text-center">Chỉ tiêu phân đoạn FM</th>
+
+        <th class="text-center">Thời gian xuất trung chuyển tại BCG</th>
+        <th class="text-center" >Thời gian nhập bưu cục giao</th>
+        <th class="text-center">Thời gian thực tế phân đoạn MM </th>
+        <th class="text-center">Chênh lệch thời gian phân đoạn MM</th>
+        <th class="text-center">Chỉ tiêu phân đoạn MM</th>
+
+        <th class="text-center">Thời gian nhập bưu cục giao</th>
+        <th class="text-center" >Thời gian thay đổi trạng thái giao lần đầu tiên</th>
+        <th class="text-center">Thời gian thực tế phân đoạn LM </th>
+        <th class="text-center">Chênh lệch thời gian phân đoạn LM</th>
+        <th class="text-center">Chỉ tiêu phân đoạn LM</th>
+
+        <!-- <th class="text-center">Thời gian toàn trình thực tế</th>
+        <th class="text-center">Chênh lệch thời gian toàn trình</th>
+        <th class="text-center">Chỉ tiêu toàn trình</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of listOfData" class="fixrow">
+        <td class="text-center" nzLeft>{{data.maPhieuGui?data.maPhieuGui:'-'}}</td>
+        <td class="text-center" nzLeft>{{data.maDoiTac?data.maDoiTac:'-'}}</td>
+        <td class="text-center" >{{data.maKhachHang?data.maKhachHang:'-'}}</td>
+        <td class="text-center">{{data.maDichVu?data.maDichVu:'-'}}</td>
+        <td class="text-center">{{data.loaiDon?data.loaiDon:'-'}}</td>
+        <td class="text-center">{{data.loaiHh?(data.loaiHh | loaihh):'-'}}</td>
+        <td class="text-center">{{data.trangThai.toString()?((data.trangThai==0)? 200 : data.trangThai ):'-'}}</td>
+        <td class="text-center">{{data.nhomDv?data.nhomDv:'-'}}</td>
+        <td class="text-center">{{data.bcNhan?data.bcNhan:'-'}}</td>
+        <td class="text-center">{{data.cnNhan?data.cnNhan:'-'}}</td>
+        <td class="text-center">{{data.bcHienTai?data.bcHienTai:'-'}}</td>
+        <td class="text-center">{{data.cnHienTai?data.cnHienTai:'-'}}</td>
+        <td class="text-center">{{data.bcGiao?data.bcGiao:'-'}}</td>
+        <td class="text-center">{{data.cnGiao?data.cnGiao:'-'}}</td>
+
+        <td class="text-center">{{(data.fmTgNhapDt&&data.fmTgNhapDt.trim()!='')?(data.fmTgNhapDt|date :"HH:mm:ss  dd/MM/yyyy"):'-'}}</td>
+        <td class="text-center" >{{(data.fmTgXuatTcBcg&&data.fmTgXuatTcBcg.trim()!='')?(data.fmTgXuatTcBcg|date :"HH:mm:ss dd/MM/yyyy"):'-'}}</td>
+        <!-- <td class="text-center">{{(data.fmTgThuctePhandoan&&data.fmTgThuctePhandoan.trim()!='')?(data.fmTgThuctePhandoan|date :"hh:mm:ss dd/MM/yyyy"):'-'}}</td>
+         -->
+        <td class="text-center">{{(data.fmTgThuctePhandoan&&data.fmTgThuctePhandoan.trim()!='')?(data.fmTgThuctePhandoan):'-'}}</td>
+        <!-- <td class="text-center">{{(data.fmTgNhapDt&&data.fmTgNhapDt.trim()!='')?(data.fmTgNhapDt):'-'}}</td>
+        <td class="text-center" >{{(data.fmTgXuatTcBcg&&data.fmTgXuatTcBcg.trim()!='')?(data.fmTgXuatTcBcg):'-'}}</td>
+        <td class="text-center">{{(data.fmTgThuctePhandoan&&data.fmTgThuctePhandoan.trim()!='')?(data.fmTgThuctePhandoan):'-'}}</td> -->
+        <td class="text-center">{{(data.fmChenhLech&&data.fmChenhLech.trim()!='')?(data.fmChenhLech):'-'}}</td>
+        <td class="text-center">
+          <nz-tag *ngIf="(data.fmDanhgia !== 'Đạt' && data.fmDanhgia !== 'ĐẠT' && data.fmDanhgia !== 'NA'  && data.fmDanhgia !== 'N/A' &&data.fmDanhgia !== '' &&data.fmDanhgia !== null)" [nzColor]="'error'">{{ data.fmDanhgia }}</nz-tag>
+              <nz-tag *ngIf="(data.fmDanhgia === 'Đạt'||data.fmDanhgia === 'ĐẠT')" [nzColor]="'success'">{{ data.fmDanhgia }}</nz-tag>
+              <nz-tag *ngIf="(data.fmDanhgia === 'N/A'||data.fmDanhgia === 'NA'|| data.fmDanhgia === '' ||data.fmDanhgia === null)" [nzColor]="''">Chưa hoàn thành</nz-tag>
+        </td>
+
+        <td class="text-center">{{(data.mmTgXuatTcBcg&&data.mmTgXuatTcBcg.trim()!='')?(data.mmTgXuatTcBcg|date :"HH:mm:ss dd/MM/yyyy"):'-'}}</td>
+        <td class="text-center" >{{(data.mmTgNhapBcg&&data.mmTgNhapBcg.trim()!='')?(data.mmTgNhapBcg|date :"HH:mm:ss dd/MM/yyyy"):'-'}}</td>
+        <td class="text-center">{{(data.mmTgThuctePhandoan&&data.mmTgThuctePhandoan.trim()!='')?(data.mmTgThuctePhandoan):'-'}}</td>
+       <!--  <td class="text-center">{{(data.mmTgThuctePhandoan&&data.mmTgThuctePhandoan.trim()!='')?(data.mmTgThuctePhandoan|date :"hh:mm:ss dd/MM/yyyy"):'-'}}</td> -->
+        <!-- <td class="text-center">{{(data.mmTgXuatTcBcg&&data.mmTgXuatTcBcg.trim()!='')?(data.mmTgXuatTcBcg):'-'}}</td>
+        <td class="text-center" >{{(data.mmTgNhapBcg&&data.mmTgNhapBcg.trim()!='')?(data.mmTgNhapBcg):'-'}}</td>
+        <td class="text-center">{{(data.mmTgThuctePhandoan&&data.mmTgThuctePhandoan.trim()!='')?(data.mmTgThuctePhandoan):'-'}}</td> -->
+        <td class="text-center">{{(data.mmChenhLech&&data.mmChenhLech.trim()!='')?(data.mmChenhLech):'-'}}</td>
+        <td class="text-center">
+          <nz-tag *ngIf="(data.mmDanhgia !== 'Đạt' && data.mmDanhgia !== 'ĐẠT' && data.mmDanhgia !== 'NA' && data.mmDanhgia !== 'N/A'&& data.mmDanhgia !== '' && data.mmDanhgia !== null)" [nzColor]="'error'">{{ data.mmDanhgia }}</nz-tag>
+          <nz-tag *ngIf="(data.mmDanhgia === 'Đạt'||data.mmDanhgia === 'ĐẠT')" [nzColor]="'success'">{{ data.mmDanhgia }}</nz-tag>
+          <nz-tag *ngIf="(data.mmDanhgia === 'NA'||data.mmDanhgia === 'N/A'|| data.mmDanhgia === '' || data.mmDanhgia === null)" [nzColor]="''">Chưa hoàn thành</nz-tag>
+        </td>
+
+        <td class="text-center">{{(data.lmTgNhapBcg&&data.lmTgNhapBcg.trim()!='')?(data.lmTgNhapBcg|date :"HH:mm:ss dd/MM/yyyy"):'-'}}</td>
+        <td class="text-center" >{{(data.lmTgGiaoLandau&&data.lmTgGiaoLandau.trim()!='')?(data.lmTgGiaoLandau|date :"HH:mm:ss dd/MM/yyyy"):'-'}}</td>
+        <td class="text-center">{{(data.lmTgThuctePhandoan&&data.lmTgThuctePhandoan.trim()!='')?(data.lmTgThuctePhandoan):'-'}} </td>
+        <!-- <td class="text-center">{{(data.lmTgThuctePhandoan&&data.lmTgThuctePhandoan.trim()!='')?(data.lmTgThuctePhandoan|date :"hh:mm:ss dd/MM/yyyy"):'-'}} </td> -->
+        <!-- <td class="text-center">{{(data.lmTgNhapBcg&&data.lmTgNhapBcg.trim()!='')?(data.lmTgNhapBcg):'-'}}</td>
+        <td class="text-center" >{{(data.lmTgGiaoLandau&&data.lmTgGiaoLandau.trim()!='')?(data.lmTgGiaoLandau):'-'}}</td>
+        <td class="text-center">{{(data.lmTgThuctePhandoan&&data.lmTgThuctePhandoan.trim()!='')?(data.lmTgThuctePhandoan):'-'}} </td> -->
+        <td class="text-center">{{(data.lmChenhLech&&data.lmChenhLech.trim()!='')?(data.lmChenhLech):'-'}}</td>
+        <td class="text-center">
+          <nz-tag *ngIf="(data.lmDanhgia !== 'Đạt' && data.lmDanhgia !== 'ĐẠT'  && data.lmDanhgia !== 'NA' && data.lmDanhgia !== '' && data.lmDanhgia !== null)" [nzColor]="'error'">{{ data.lmDanhgia }}</nz-tag>
+          <nz-tag *ngIf="(data.lmDanhgia === 'Đạt'||data.lmDanhgia === 'ĐẠT')" [nzColor]="'success'">{{ data.lmDanhgia }}</nz-tag>
+          <nz-tag *ngIf="(data.lmDanhgia === 'NA' ||data.lmDanhgia === 'N/A' || data.lmDanhgia === '' || data.lmDanhgia === null)" [nzColor]="''">Chưa hoàn thành</nz-tag>
+        </td>
+
+      <!--   <td class="text-center">{{data.maPhieuGui?(data.maPhieuGui|date :"hh:mm:ss d/MM/yyyy"):'-'}}</td>
+        <td class="text-center">{{data.maPhieuGui?(data.maPhieuGui|textDate):'-'}}</td>
+        <td class="text-center">{{data.maPhieuGui?data.maPhieuGui:'-'}}
+          <nz-tag *ngIf="(data.lmDanhgia !== 'Đạt' && data.lmDanhgia !== 'ĐẠT' && data.lmDanhgia !== 'N/A')" [nzColor]="'error'">{{ data.lmDanhgia }}</nz-tag>
+          <nz-tag *ngIf="(data.lmDanhgia === 'Đạt'||data.lmDanhgia === 'ĐẠT')" [nzColor]="'success'">{{ data.lmDanhgia }}</nz-tag>
+          <nz-tag *ngIf="(data.lmDanhgia === 'N/A')" [nzColor]="''">Chưa hoàn thành</nz-tag>
+        </td> -->
+      </tr>
+    </tbody>
+      <ng-template #footer>
+        <span *ngIf="total">Tổng {{ total }} bản ghi</span>
+      </ng-template>
+    </nz-table>
+  </div>
+
+</cms-page>

@@ -1,0 +1,175 @@
+<cms-page title="Báo cáo theo dõi khách hàng lớn tại Viettel Post" [close]="false">
+  <div action>
+
+  </div>
+  <div content style="margin-top:110px;">
+   <!--  <div id="pie" style="width: 100%; height: 400px; display: block;">
+      <highcharts-chart
+      [Highcharts] = "highcharts"
+      [options]="chartOptions"
+
+   style = "width: 100%; height: 400px; display: block;">
+</highcharts-chart>
+    </div> -->
+    <div nz-row class=" mt-3 navbar" [nzGutter]="[16, 5]">
+
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="unitId"  nzPlaceHolder="Chọn cấp đơn vị" nzAllowClear (ngModelChange)="unitChange($event)">
+          <nz-option  [nzValue]="1" [nzLabel]="'TCT'" ></nz-option>
+          <nz-option  [nzValue]="2" [nzLabel]="'Vùng'"></nz-option>
+          <nz-option  [nzValue]="3" [nzLabel]="'Chi nhánh'"></nz-option>
+        </nz-select>
+      </div>
+     <!--  <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="postId"  nzPlaceHolder="Lọc theo mã đối tác" nzAllowClear (ngModelChange)="postchange($event)">
+          <nz-option *ngFor="let o of listOfPost" [nzValue]="o.maBuuCuc" [nzLabel]="o.maBuuCuc.concat(' - ',o.tenBuuCuc)"></nz-option>
+        </nz-select>
+      </div> -->
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="reportCategory"  nzPlaceHolder="Chọn kiểu báo cáo" nzAllowClear (ngModelChange)="reportCategoryChange($event)">
+          <nz-option *ngFor="let o of listOfReportType" [nzValue]="o.code" [nzLabel]="o.name"></nz-option>
+        </nz-select>
+      </div>
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="mart"  nzPlaceHolder="Chọn thị trường" nzAllowClear (ngModelChange)="martChange($event)">
+          <nz-option *ngFor="let o of listOfMart" [nzValue]="o.code" [nzLabel]="o.name"></nz-option>
+        </nz-select>
+      </div>
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="martCategory"  nzPlaceHolder="Chọn nhóm thị trường" nzAllowClear (ngModelChange)="martCategoryChange($event)">
+          <nz-option *ngFor="let o of listOfCategoryMart" [nzValue]="o.code" [nzLabel]="o.name"></nz-option>
+        </nz-select>
+      </div>
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-select class="width-full" nzShowSearch [(ngModel)]="object"  nzPlaceHolder="Chọn đối tượng" nzAllowClear (ngModelChange)="objectChange($event)">
+          <nz-option *ngFor="let o of listOfObject" [nzValue]="o.code" [nzLabel]="o.name"></nz-option>
+        </nz-select>
+      </div>
+
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-range-picker *ngIf="reportCategory==='LUY_KE_NGAY'"  nzFormat="dd/MM/yyyy" [(ngModel)]="dates" nzShowTime [nzPlaceHolder]="['Từ ngày', 'Đến ngày']"  (nzOnCalendarChange)="onDatePickerChange($event)">
+        </nz-range-picker>
+        <app-date-selector *ngIf="reportCategory==='TUAN'" (onSelect)="filterSelect($event)"></app-date-selector>
+        <nz-date-picker [(ngModel)]="date" *ngIf="reportCategory==='GAN_NHAT_7_NGAY'"  (ngModelChange)="onDayChange($event)"></nz-date-picker>
+
+       <!-- <nz-range-picker [nzAllowClear] nzFormat="yyyy/MM/dd" ngModel [nzPlaceHolder]="['Lọc theo thời gian']"></nz-range-picker> -->
+      </div>
+     <!--  <div nz-col class="mt-3" nzXs="12" nzSm="11" nzMd="10" nzLg="9" nzXl="4" nzXXl="4">
+        <button nz-button nzType="primary" (click)="btnSearch()"class="mr-3">
+          <i nz-icon nzType="search" nzTheme="outline"></i>Tìm kiếm
+        </button>
+      </div> -->
+    </div>
+     <div class="main mt-11">
+      <nz-card class="mt-11">
+
+        <div nz-row  [nzGutter]="[20,20]">
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <div #chartscolumn></div>
+            </figure>
+           <!--  <div nz-row>
+              <nz-table class="mt-5"
+      nzShowSizeChanger
+      [nzData]="">
+        <thead>
+          <tr>
+            <th class="text-center" >Mã đơn hàng</th>
+            <th class="text-center" >Mã khách hàng</th>
+            <th class="text-center" >Loại đơn hàng</th>
+            <th class="text-center" >Trạng thái hiện tại</th>
+            <th class="text-center" >Kho hiện tại</th>
+            <th class="text-center" >Mã dịch vụ</th>
+            <th class="text-center">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfData" >
+            <td class="with-table " >{{data.maPhieuGui?data.maPhieuGui:'-'}}</td>
+           <td class="text-center" >{{data.maKhachHang?data.maKhachHang:'-'}}</td>
+           <td class="text-center">{{data.loaiDon?data.loaiDon:'-'}}</td>
+           <td class="text-center">{{data.trangThai?data.trangThai:'-'}}</td>
+           <td class="text-center">{{data.bcHienTai?data.bcHienTai:'-'}}</td>
+           <td class="text-center">{{data.maDichVu?data.maDichVu:'-'}}</td>
+           <td class="text-center">
+            <button nz-button nz-button nzType="text" title="Gửi Ticket">
+              <i nz-icon nzType="send" nzTheme="outline"></i>
+            </button>
+            <button nz-button nz-button nzType="text" title="Comment">
+              <i nz-icon nzType="comment" nzTheme="outline" ></i>
+            </button>
+           </td>
+          </tr>
+        </tbody>
+        <ng-template #footer>
+          <span *ngIf="total">Tổng {{ total }} bản ghi</span>
+        </ng-template>
+      </nz-table>
+
+            </div> -->
+          </div>
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <div #chartscolumn1></div>
+            </figure>
+          </div>
+        </div>
+
+        <div class="mt-5" nz-row  [nzGutter]="[20,20]">
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <div #chartscompare></div>
+            </figure>
+          </div>
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <div #chartscompare1></div>
+            </figure>
+          </div>
+        </div>
+      </nz-card>
+
+      <nz-card class="mt-5">
+        <h4 class="text-center" nz-typography>Biến động sản lượng tuần từ ngày {{enterFrom |date: 'dd/MM/yyyy'}} - đến ngày {{enterTo |date: 'dd/MM/yyyy'}}</h4>
+        <div nz-row  [nzGutter]="[20,20]">
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <!-- <div id="container" name="container"></div> -->
+              <div  id="container" #charts></div>
+            </figure>
+          </div>
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <!-- <div id="container" name="container"></div> -->
+              <div  id="container1" #charts1></div>
+            </figure>
+          </div>
+        </div>
+      </nz-card>
+
+      <nz-card class="mt-5">
+        <h4 class="text-center" nz-typography>Biến động doanh thu tuần từ ngày {{enterFrom|date: 'dd/MM/yyyy'}} - đến ngày {{enterTo|date: 'dd/MM/yyyy'}}</h4>
+        <div nz-row  [nzGutter]="[20,20]">
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <!-- <div id="container" name="container"></div> -->
+              <div  id="container2" #charts2></div>
+            </figure>
+          </div>
+          <div nz-col nzSpan="12">
+            <figure class="highcharts-figure">
+              <!-- <div id="container" name="container"></div> -->
+              <div  id="container3" #charts3></div>
+            </figure>
+          </div>
+        </div>
+      </nz-card>
+    </div>
+
+  </div>
+
+</cms-page>

@@ -1,0 +1,96 @@
+[
+    {
+        "key": "VHT TEST",
+        "value": "CHUYỂN PHÁT HỎA TỐC TEST"
+    }, {
+        "key": "SCOD",
+        "value": "COD - Liên tỉnh nhanh"
+    }, {
+        "key": "ECOD",
+        "value": "COD - Liên tỉnh tiết kiệm"
+    }, {
+        "key": "VCBA",
+        "value": "Chuyển Phát Đường Bay"
+    }, {
+        "key": "VCBO",
+        "value": "Chuyển Phát Đường Bộ"
+    }, {
+        "key": "NCOD",
+        "value": "Chuyển phát nhanh"
+    }, {
+        "key": "VNB",
+        "value": "Chuyển phát nội bộ"
+    }, {
+        "key": "LCOD",
+        "value": "Chuyển phát tiết kiệm"
+    }, {
+        "key": "V510",
+        "value": "Dịch vụ 5+ gói 1000g"
+    }, {
+        "key": "V520",
+        "value": "Dịch vụ 5+ gói 2000g"
+    }, {
+        "key": "V505",
+        "value": "Dịch vụ 5+ gói 500g"
+    }, {
+        "key": "LME",
+        "value": "Dịch vụ Lastmile"
+    }, {
+        "key": "VTQ",
+        "value": "Giao Voucher thu tiền tại quầy"
+    }, {
+        "key": "VHK",
+        "value": "HCC - Nhận bưu cục, trả tại nhà"
+    }, {
+        "key": "VHC",
+        "value": "HCC - Nhận trả tại bưu cục"
+    }, {
+        "key": "VHN",
+        "value": "HCC - Nhận tại Sở, trả tại nhà"
+    }, {
+        "key": "LSTD",
+        "value": "Hàng nặng nhanh"
+    }, {
+        "key": "LECO",
+        "value": "Hàng nặng tiết kiệm"
+    }, {
+        "key": "VHT",
+        "value": "Hỏa tốc, hẹn giờ"
+    }, {
+        "key": "NKL",
+        "value": "NKL"
+    }, {
+        "key": "PTN",
+        "value": "Nội tỉnh nhanh"
+    }, {
+        "key": "PHS",
+        "value": "Nội tỉnh tiết kiệm"
+    }, {
+        "key": "VEBA",
+        "value": "SAN TMDT BAY"
+    }, {
+        "key": "VEBO",
+        "value": "SAN TMDT BO"
+    }, {
+        "key": "VENT",
+        "value": "SAN TMDT NOI TINH"
+    }, {
+        "key": "VCN",
+        "value": "Tài liệu nhanh"
+    }, {
+        "key": "VTK",
+        "value": "Tài liệu tiết kiệm"
+    }, {
+        "key": "VLF",
+        "value": "VLF - Dịch vụ Forwarding"
+    }, {
+        "key": "VLQ",
+        "value": "VLQ - Khai thuê hải quan"
+    }, {
+        "key": "VCK",
+        "value": "Vận chuyển hàng theo kiện"
+    }, {
+        "key": "V24",
+        "value": "Đồng giá 24k"
+    }
+  ]

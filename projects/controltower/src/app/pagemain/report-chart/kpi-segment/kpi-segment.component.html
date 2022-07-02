@@ -1,0 +1,78 @@
+<div>
+  <div>
+
+    <div nz-row [nzGutter]="[16,5]">
+      <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+        <nz-select class="width-full" nzShowSearch [ngModel]="postId" nzPlaceHolder="Lọc theo chi nhánh nhận"
+          nzAllowClear (ngModelChange)="postchange($event)">
+          <nz-option *ngFor="let o of listOfProvice" [nzValue]="o.key" nzLabel="{{o.key}} - {{o.value}}"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col class="mt-3" nzXs="12" nzSm="6" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+        <nz-select [(ngModel)]="status" nzAllowClear style="width: 100%" nzPlaceHolder="Lọc theo hành trình"
+          (ngModelChange)="jouneychange($event)">
+          <nz-option nzValue="Nhanh" nzLabel="Nhanh"></nz-option>
+          <nz-option nzValue="Hỏa tốc" nzLabel="Hỏa tốc"></nz-option>
+          <nz-option nzValue="Tiết kiệm" nzLabel="Tiết kiệm"></nz-option>
+        </nz-select>
+      </div>
+      <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+        <nz-select class="width-full" nzShowSearch [ngModel]="spId" nzPlaceHolder="Lọc theo mã dịch vụ" nzAllowClear
+          (ngModelChange)="Spchange($event)">
+          <nz-option *ngFor="let o of listOfSP" [nzValue]="o.mabc" nzLabel="{{o.mabc}} - {{o.tenbc}}"></nz-option>
+
+        </nz-select>
+      </div>
+      <div nz-col class="mt-3" nzXs="12" nzSm="6" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+        <nz-select [(ngModel)]="categoriesOrder" nzShowSearch nzAllowClear style="width: 100%"
+          nzPlaceHolder="Lọc theo loại đơn">
+          <nz-option nzValue="Nội kho" nzLabel="Nội kho"></nz-option>
+          <nz-option nzValue="Nội tỉnh" nzLabel="Nội tỉnh"></nz-option>
+          <nz-option nzValue="Nội vùng" nzLabel="Nội vùng"></nz-option>
+          <nz-option nzValue="Cận vùng" nzLabel="Cận vùng"></nz-option>
+          <nz-option nzValue="Liên vùng" nzLabel="Liên vùng"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="[20,40]">
+      <div id="chart" style=" text-align:center;" class="mt-7" nz-col nzSpan="19">
+        <nz-card style="height: 805px;">
+          <div>
+            <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+              [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels">
+            </apx-chart>
+          </div>
+
+        </nz-card>
+      </div>
+      <div nz-col nzSpan="5" class="mt-7" style="text-align: center;">
+        <nz-card style="height: 260px;">
+          <div id="chartoverallFM" class="ml-5">
+            <h5 nz-typography>Tỉ lệ đúng phân đoạn FM</h5>
+            <apx-chart [series]="chartOptionsSegmentOverallFM.series" [chart]="chartOptionsSegmentOverallFM.chart"
+              [plotOptions]="chartOptionsSegmentOverallFM.plotOptions" [labels]="chartOptionsSegmentOverallFM.labels"
+              [colors]="chartOptionsSegmentOverallFM.colors"></apx-chart>
+          </div>
+        </nz-card>
+        <nz-card class="mt-3" style="height: 260px;">
+          <div id="chartoverallMM" class="ml-5">
+            <h5 nz-typography>Tỉ lệ đúng phân đoạn MM</h5>
+            <apx-chart [series]="chartOptionsSegmentOverallMM.series" [chart]="chartOptionsSegmentOverallMM.chart"
+              [plotOptions]="chartOptionsSegmentOverallMM.plotOptions" [labels]="chartOptionsSegmentOverallMM.labels"
+              [colors]="chartOptionsSegmentOverallMM.colors"></apx-chart>
+          </div>
+        </nz-card>
+        <nz-card class="mt-3 " style="height: 260px;">
+          <div id="chartoverallLM" style="text-align: center;" class="ml-5">
+            <h5 nz-typography>Tỉ lệ đúng phân đoạn LM</h5>
+            <apx-chart [series]="chartOptionsSegmentOverallLM.series" [chart]="chartOptionsSegmentOverallLM.chart"
+              [plotOptions]="chartOptionsSegmentOverallLM.plotOptions" [labels]="chartOptionsSegmentOverallLM.labels"
+              [colors]="chartOptionsSegmentOverallLM.colors"></apx-chart>
+          </div>
+        </nz-card>
+      </div>
+    </div>
+  </div>
+
+</div>

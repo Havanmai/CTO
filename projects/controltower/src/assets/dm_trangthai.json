@@ -1,0 +1,69 @@
+[
+    {
+        "key": 105,
+        "value": "Buu Tá đã nhận hàng"
+    }, {
+        "key": 106,
+        "value": "Đối tác yêu cầu lấy lại hàng"
+    }, {
+        "key": 200,
+        "value": "Nhận từ bưu tá - Bưu cục gốc"
+    }, {
+        "key": 202,
+        "value": "Sửa phiếu gủi"
+    }, {
+        "key": 300,
+        "value": "Đóng bảng kê đi"
+    }, {
+        "key": 301,
+        "value": "Ðóng túi gói"
+    }, {
+        "key": 302,
+        "value": "Đóng Chuyến thư"
+    }, {
+        "key": 303,
+        "value": "Đóng tuyến xe"
+    }, {
+        "key": 400,
+        "value": "Nhận bảng kê đến"
+    }, {
+        "key": 401,
+        "value": "Nhận Túi gói"
+    }, {
+        "key": 402,
+        "value": "Nhận chuyến thư"
+    }, {
+        "key": 403,
+        "value": "Nhận chuyến xe"
+    }, {
+        "key": 500,
+        "value": "Giao bưu tá đi phát"
+    }, {
+        "key": 502,
+        "value": "Chuyển hoàn bưu cục gốc"
+    }, {
+        "key": 505,
+        "value": "Tồn - Thông báo chuyển hoàn bưu cục gốc"
+    }, {
+        "key": 506,
+        "value": "Tồn - Khách hàng nghỉ, không có nhà"
+    }, {
+        "key": 507,
+        "value": "Tồn - Khách hàng đến bưu cục nhận "
+    }, {
+        "key": 508,
+        "value": "Phát tiếp"
+    }, {
+        "key": 509,
+        "value": "Chuyển tiếp bưu cục khác "
+    }, {
+        "key": 510,
+        "value": "Hủy phân công phát"
+    }, {
+        "key": 515,
+        "value": "Bưu cục phát duyệt hoàn"
+    }, {
+        "key": 550,
+        "value": "Đơn Vị Yêu Cầu Phát Tiếp"
+    }
+  ]

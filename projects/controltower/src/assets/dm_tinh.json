@@ -1,0 +1,348 @@
+[
+    {
+        "key": "AGG",
+        "value": "An Giang"
+    }, {
+        "key": "BAH",
+        "value": "Ba Đình-HNI"
+    }, {
+        "key": "BDG",
+        "value": "Bình Dương"
+    }, {
+        "key": "BPC",
+        "value": "Bình Phước"
+    }, {
+        "key": "BTN",
+        "value": "Bình Thuận"
+    }, {
+        "key": "BTH",
+        "value": "Bình Thạnh-HCM"
+    }, {
+        "key": "BHT",
+        "value": "Bình Tân-HCM"
+    }, {
+        "key": "BDH",
+        "value": "Bình Định"
+    }, {
+        "key": "TCTVTP",
+        "value": "Bưu Chính Viettel"
+    }, {
+        "key": "BLU",
+        "value": "Bạc Liêu"
+    }, {
+        "key": "BGG",
+        "value": "Bắc Giang"
+    }, {
+        "key": "BKN",
+        "value": "Bắc Kạn"
+    }, {
+        "key": "BNH",
+        "value": "Bắc Ninh"
+    }, {
+        "key": "BTLM",
+        "value": "Bắc Từ Liêm"
+    }, {
+        "key": "BTE",
+        "value": "Bến Tre"
+    }, {
+        "key": "CTLT",
+        "value": "CPN Liên Tỉnh"
+    }, {
+        "key": "CNT",
+        "value": "CPN nội tỉnh"
+    }, {
+        "key": "CAM",
+        "value": "Cambodia"
+    }, {
+        "key": "CBG",
+        "value": "Cao Bằng"
+    }, {
+        "key": "CMU",
+        "value": "Cà Mau"
+    }, {
+        "key": "CTO",
+        "value": "Cần Thơ"
+    }, {
+        "key": "CGY",
+        "value": "Cầu Giấy-HNI"
+    }, {
+        "key": "GLI",
+        "value": "Gia Lai"
+    }, {
+        "key": "GVP",
+        "value": "Gò Vấp-HCM"
+    }, {
+        "key": "HBT",
+        "value": "Hai Bà Trưng-HNI"
+    }, {
+        "key": "HKM",
+        "value": "Hoàn Kiếm-HNI"
+    }, {
+        "key": "HMI",
+        "value": "Hoàng Mai-HNI"
+    }, {
+        "key": "HUE",
+        "value": "Huế"
+    }, {
+        "key": "HGG",
+        "value": "Hà Giang"
+    }, {
+        "key": "HNM",
+        "value": "Hà Nam"
+    }, {
+        "key": "HTH",
+        "value": "Hà Tĩnh"
+    }, {
+        "key": "HAG",
+        "value": "Hà Đông-HNI"
+    }, {
+        "key": "HBH",
+        "value": "Hòa Bình"
+    }, {
+        "key": "HYN",
+        "value": "Hưng Yên"
+    }, {
+        "key": "HDG",
+        "value": "Hải Dương"
+    }, {
+        "key": "HPG",
+        "value": "Hải Phòng"
+    }, {
+        "key": "HUG",
+        "value": "Hậu Giang"
+    }, {
+        "key": "KHDN",
+        "value": "KH Doanh Nghiệp"
+    }, {
+        "key": "KHA",
+        "value": "Khánh Hòa"
+    }, {
+        "key": "KGG",
+        "value": "Kiên Giang"
+    }, {
+        "key": "KTM",
+        "value": "Kon Tum"
+    }, {
+        "key": "LCU",
+        "value": "Lai  Châu"
+    }, {
+        "key": "PLOG",
+        "value": "Logistic"
+    }, {
+        "key": "LAN",
+        "value": "Long An"
+    }, {
+        "key": "LBN",
+        "value": "Long Biên-HNI"
+    }, {
+        "key": "LCI",
+        "value": "Lào Cai"
+    }, {
+        "key": "LDG",
+        "value": "Lâm Đồng"
+    }, {
+        "key": "LSN",
+        "value": "Lạng Sơn"
+    }, {
+        "key": "TLM",
+        "value": "Nam Từ Liêm"
+    }, {
+        "key": "NDH",
+        "value": "Nam Định"
+    }, {
+        "key": "NAN",
+        "value": "Nghệ An"
+    }, {
+        "key": "NBH",
+        "value": "Ninh Bình"
+    }, {
+        "key": "NTN",
+        "value": "Ninh Thuận"
+    }, {
+        "key": "PNN",
+        "value": "Phú Nhuận-HCM"
+    }, {
+        "key": "PHO",
+        "value": "Phú Thọ"
+    }, {
+        "key": "PYN",
+        "value": "Phú Yên"
+    }, {
+        "key": "QBH",
+        "value": "Quảng Bình"
+    }, {
+        "key": "QNM",
+        "value": "Quảng Nam"
+    }, {
+        "key": "QNI",
+        "value": "Quảng Ngãi"
+    }, {
+        "key": "QNH",
+        "value": "Quảng Ninh"
+    }, {
+        "key": "QTI",
+        "value": "Quảng Trị"
+    }, {
+        "key": "QN1",
+        "value": "Quận 1-HCM"
+    }, {
+        "key": "QU10",
+        "value": "Quận 10-HCM"
+    }, {
+        "key": "QU11",
+        "value": "Quận 11-HCM"
+    }, {
+        "key": "QU12",
+        "value": "Quận 12-HCM"
+    }, {
+        "key": "QU2",
+        "value": "Quận 2-HCM"
+    }, {
+        "key": "QU3",
+        "value": "Quận 3-HCM"
+    }, {
+        "key": "QU4",
+        "value": "Quận 4-HCM"
+    }, {
+        "key": "QU5",
+        "value": "Quận 5-HCM"
+    }, {
+        "key": "QU6",
+        "value": "Quận 6-HCM"
+    }, {
+        "key": "QU7",
+        "value": "Quận 7-HCM"
+    }, {
+        "key": "QU8",
+        "value": "Quận 8-HCM"
+    }, {
+        "key": "QU9",
+        "value": "Quận 9-HCM"
+    }, {
+        "key": "STG",
+        "value": "Sóc Trăng"
+    }, {
+        "key": "SLA",
+        "value": "Sơn La"
+    }, {
+        "key": "THA",
+        "value": "Thanh Hóa"
+    }, {
+        "key": "TTI",
+        "value": "Thanh Trì"
+    }, {
+        "key": "TXN",
+        "value": "Thanh Xuân-HNI"
+    }, {
+        "key": "TBH",
+        "value": "Thái Bình"
+    }, {
+        "key": "TNN",
+        "value": "Thái Nguyên"
+    }, {
+        "key": "TMDV",
+        "value": "Thương Mại Dịch Vụ"
+    }, {
+        "key": "TDC",
+        "value": "Thủ Đức"
+    }, {
+        "key": "TGG",
+        "value": "Tiền Giang"
+    }, {
+        "key": "TVH",
+        "value": "Trà Vinh"
+    }, {
+        "key": "TQG",
+        "value": "Tuyên Quang"
+    }, {
+        "key": "TAB",
+        "value": "Tân Bình-HCM"
+    }, {
+        "key": "TPU",
+        "value": "Tân Phú-HCM"
+    }, {
+        "key": "TNH",
+        "value": "Tây Ninh"
+    }, {
+        "key": "TCT",
+        "value": "Tổng Công Ty Bưu Chính Viettel"
+    }, {
+        "key": "V1",
+        "value": "Vùng 1"
+    }, {
+        "key": "V10",
+        "value": "Vùng 10"
+    }, {
+        "key": "V11",
+        "value": "Vùng 11"
+    }, {
+        "key": "V12",
+        "value": "Vùng 12"
+    }, {
+        "key": "V14",
+        "value": "Vùng 14"
+    }, {
+        "key": "V15",
+        "value": "Vùng 15"
+    }, {
+        "key": "V2",
+        "value": "Vùng 2"
+    }, {
+        "key": "V3",
+        "value": "Vùng 3"
+    }, {
+        "key": "V4",
+        "value": "Vùng 4"
+    }, {
+        "key": "V5",
+        "value": "Vùng 5"
+    }, {
+        "key": "V6",
+        "value": "Vùng 6"
+    }, {
+        "key": "V7",
+        "value": "Vùng 7"
+    }, {
+        "key": "V8",
+        "value": "Vùng 8"
+    }, {
+        "key": "V9",
+        "value": "Vùng 9"
+    }, {
+        "key": "VLG",
+        "value": "Vĩnh Long"
+    }, {
+        "key": "VPC",
+        "value": "Vĩnh Phúc"
+    }, {
+        "key": "VTU",
+        "value": "Vũng Tàu"
+    }, {
+        "key": "YBN",
+        "value": "Yên Bái"
+    }, {
+        "key": "DBN",
+        "value": "Điện Biên"
+    }, {
+        "key": "DNG",
+        "value": "Đà Nẵng"
+    }, {
+        "key": "DAH",
+        "value": "Đông Anh-HNI"
+    }, {
+        "key": "DLK",
+        "value": "Đăklak"
+    }, {
+        "key": "DKG",
+        "value": "Đắk Nông"
+    }, {
+        "key": "DDA",
+        "value": "Đống Đa-HNI"
+    }, {
+        "key": "DNI",
+        "value": "Đồng Nai"
+    }, {
+        "key": "DTP",
+        "value": "Đồng Tháp"
+    }
+]

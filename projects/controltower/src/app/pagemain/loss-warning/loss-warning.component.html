@@ -1,0 +1,138 @@
+<cms-page title="Báo cáo nguy cơ mất hàng" [close]="false">
+  <div content class="mt-8">
+
+
+    <div nz-row [nzGutter]="[16, 5]">
+      <!--  <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+         <nz-select class="width-full" nzShowSearch [(ngModel)]="postId"  nzPlaceHolder="Lọc theo mã đối tác" nzAllowClear (ngModelChange)="postchange($event)">
+           <nz-option *ngFor="let o of listOfPost" [nzValue]="o.maBuuCuc" [nzLabel]="o.maBuuCuc.concat(' - ',o.tenBuuCuc)"></nz-option>
+         </nz-select>
+       </div> -->
+
+       <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <nz-input-group class="width-full mt-4" [nzPrefix]="prefixIconSearch1" [nzSuffix]="inputClearTpl1">
+          <input type="text" nz-input placeholder="Nhập mã khách hàng" [(ngModel)]="codeKH"
+            (keyup.enter)="searchKeyWordKH()" />
+        </nz-input-group>
+        <ng-template #prefixIconSearch1>
+          <i nz-icon nzType="user" (click)="searchKeyWordKH()"></i>
+        </ng-template>
+        <ng-template #inputClearTpl1>
+          <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="codeKH"
+            (click)="codeKH = ''; searchKeyWordKH()"></i>
+        </ng-template>
+      </div>
+
+       <!-- <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+         <nz-select class="width-full mt-4" nzShowSearch [(ngModel)]="branch"  nzPlaceHolder="Lọc theo kho hiện tại" nzAllowClear (ngModelChange)="branchChange($event)">
+           <nz-option *ngFor="let o of listOfTinh" [nzValue]="o.key" [nzLabel]="o.key.concat(' - ',o.value)"></nz-option>
+         </nz-select>
+       </div> -->
+       <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+         <nz-select class="width-full mt-4" nzShowSearch [(ngModel)]="status"  nzPlaceHolder="Lọc theo trạng thái" nzAllowClear (ngModelChange)="statusChange($event)">
+           <nz-option *ngFor="let o of listOfStatus" [nzValue]="o.key" [nzLabel]="(o.key.toString()).concat(' - ',o.value)"></nz-option>
+         </nz-select>
+       </div>
+       <div  nz-col class="mt-6" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <app-date-selector  (onSelect)="filterSelect($event)"></app-date-selector>
+       <!-- <nz-range-picker [nzAllowClear] nzFormat="yyyy/MM/dd" ngModel (ngModelChange)="onChange($event)" [nzPlaceHolder]="['Lọc theo thời gian']"></nz-range-picker> -->
+      </div>
+       <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <h5 nz-typography class="mt-4" >Tổng đơn : <span nz-typography>{{tongDon|formatNumber}} đơn</span></h5>
+      </div>
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="3">
+        <h5 nz-typography>Nội Tỉnh : <span nz-typography>{{noiTinh|formatNumber}} đơn</span></h5>
+        <h5 nz-typography>Nội miền : <span nz-typography>{{noiVung|formatNumber}} đơn</span></h5>
+      </div>
+      <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="4">
+        <h5 nz-typography>Liên vùng bay : <span nz-typography>{{lienVungBay|formatNumber}} đơn</span></h5>
+        <h5 nz-typography>Liên vùng bộ : <span nz-typography>{{lienVungBo|formatNumber}} đơn</span></h5>
+      </div>
+      <div nz-col class="mt-3" nzXs="12" nzSm="11" nzMd="10" nzLg="9" nzXl="3" nzXXl="2">
+        <button nz-button nzType="primary" class="mr-3 mt-4" (click)="search()">
+          <i nz-icon nzType="search" nzTheme="outline"></i>Tìm kiếm
+        </button>
+      </div>
+
+       <div nz-col class="mt-3" nzXs="12" nzSm="11" nzMd="10" nzLg="9" nzXl="3" nzXXl="2">
+         <button nz-button nzType="primary" class="mr-3 mt-4" (click)="exportAsXLSX()">
+           <i nz-icon nzType="file-excel" nzTheme="outline"></i>Xuất Excel
+         </button>
+       </div>
+    </div>
+ <nz-table class="mt-5"
+      nzShowSizeChanger
+      [nzData]="listOfData"
+       [nzFrontPagination]="false"
+      [nzPageSize]="size"
+      [nzPageIndex]="page"
+      [nzTotal]="total"
+      [nzFooter]="footer"
+      (nzPageIndexChange)="pageChange($event)"
+      (nzQueryParams)="onQueryParamsChange($event)">
+        <thead>
+          <tr>
+            <th class="text-center" >Mã đơn hàng</th>
+            <th class="text-center" >Mã khách hàng</th>
+            <th class="text-center" >Loại đơn hàng</th>
+            <th class="text-center" >Trạng thái hiện tại</th>
+            <th class="text-center" >Kho hiện tại</th>
+            <th class="text-center" >Mã dịch vụ</th>
+            <th class="text-center">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfData" >
+            <td class="with-table " >{{data.maPhieuGui?data.maPhieuGui:'-'}}</td>
+           <td class="text-center" >{{data.maKhachHang?data.maKhachHang:'-'}}</td>
+           <td class="text-center">{{data.loaiDon?data.loaiDon:'-'}}</td>
+           <td class="text-center">{{data.trangThai?data.trangThai:'-'}}</td>
+           <td class="text-center">{{data.bcHienTai?data.bcHienTai:'-'}}</td>
+           <td class="text-center">{{data.maDichVu?data.maDichVu:'-'}}</td>
+           <td class="text-center">
+            <button nz-button nz-button nzType="text" title="Gửi Ticket">
+              <i nz-icon nzType="send" nzTheme="outline"></i>
+            </button>
+            <button nz-button nz-button nzType="text" title="Comment">
+              <i nz-icon nzType="comment" nzTheme="outline" ></i>
+            </button>
+           </td>
+          </tr>
+        </tbody>
+        <ng-template #footer>
+          <span *ngIf="total">Tổng {{ total }} bản ghi</span>
+        </ng-template>
+      </nz-table>
+      <!-- <nz-table #basicTable [nzData]="listOfData">
+        <thead>
+          <tr>
+            <th class="text-center" >Mã đơn hàng</th>
+            <th class="text-center" >Mã khách hàng</th>
+            <th class="text-center" >Loại đơn hàng</th>
+            <th class="text-center" >Trạng thái hiện tại</th>
+            <th class="text-center" >Kho hiện tại</th>
+            <th class="text-center" >Mã dịch vụ</th>
+            <th class="text-center">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td class="with-table " >{{data.maPhieuGui?data.maPhieuGui:'-'}}</td>
+           <td class="text-center" >{{data.maKhachHang?data.maKhachHang:'-'}}</td>
+           <td class="text-center">{{data.loaiDon?data.loaiDon:'-'}}</td>
+           <td class="text-center">{{data.trangThai?data.trangThai:'-'}}</td>
+           <td class="text-center">{{data.bcHienTai?data.bcHienTai:'-'}}</td>
+           <td class="text-center">{{data.maDichVu?data.maDichVu:'-'}}</td>
+           <td class="text-center">
+            <button nz-button nz-button nzType="text" title="Gửi Ticket">
+              <i nz-icon nzType="send" nzTheme="outline"></i>
+            </button>
+            <button nz-button nz-button nzType="text" title="Comment">
+              <i nz-icon nzType="comment" nzTheme="outline" ></i>
+            </button>
+           </td>
+          </tr>
+        </tbody>
+      </nz-table> -->
+  </div>
+</cms-page>

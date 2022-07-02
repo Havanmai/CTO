@@ -1,0 +1,115 @@
+<cms-page title="Báo cáo chi tiết KPI toàn trình " [close]="false">
+    <div action>
+      <div style="width:200px; float: right;">
+        <app-date-selector (onSelect)="filterSelect($event)"></app-date-selector>
+      </div>
+
+    </div>
+    <div content >
+      <div nz-row class="mt-7" [nzGutter]="[16, 5]">
+        <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+          <nz-input-group class="width-full" [nzPrefix]="prefixIconSearch" [nzSuffix]="inputClearTpl">
+            <input type="text" nz-input placeholder="Nhập mã đơn hàng để tìm kiếm" [(ngModel)]="keyword"
+              (keyup.enter)="searchKeyWord()" />
+          </nz-input-group>
+          <ng-template #prefixIconSearch>
+            <i nz-icon nzType="search" (click)="searchKeyWord()"></i>
+          </ng-template>
+          <ng-template #inputClearTpl>
+            <i nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle" *ngIf="keyword"
+              (click)="keyword = ''; searchKeyWord()"></i>
+          </ng-template>
+        </div>
+        <div  nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+          <nz-select class="width-full" nzShowSearch [(ngModel)]="postId"  nzPlaceHolder="Lọc theo chi nhánh" nzAllowClear (ngModelChange)="postchange($event)">
+            <nz-option *ngFor="let o of listOfProvice" [nzValue]="o.key" nzLabel="{{o.key}} - {{o.value}}"></nz-option>
+          </nz-select>
+        </div>
+
+        <div nz-col class="mt-3" nzXs="12" nzSm="6" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+          <nz-select [(ngModel)]="status"  nzAllowClear style="width: 100%" nzPlaceHolder="Lọc theo hành trình" (ngModelChange)="jouneychange($event)">
+            <nz-option nzValue="Nhanh" nzLabel="Nhanh"></nz-option>
+            <nz-option nzValue="Hỏa tốc" nzLabel="Hỏa tốc"></nz-option>
+            <nz-option nzValue="Tiết kiệm" nzLabel="Tiết kiệm"></nz-option>
+
+          </nz-select>
+        </div>
+        <div nz-col class="mt-3" nzXs="12" nzSm="8" nzMd="6" nzLg="6" nzXl="5" nzXXl="5">
+          <nz-select class="width-full" nzShowSearch [(ngModel)]="spId" nzPlaceHolder="Lọc theo mã dịch vụ" nzAllowClear (ngModelChange)="spchange($event)"
+            >
+            <nz-option *ngFor="let o of listOfSP" [nzValue]="o.mabc" nzLabel="{{o.mabc}} - {{o.tenbc}}"></nz-option>
+
+          </nz-select>
+        </div>
+        <div nz-col class="mt-3" nzXs="12" nzSm="11" nzMd="10" nzLg="9" nzXl="4" nzXXl="4">
+          <button nz-button nzType="primary" class="mr-3" (click)="onsearch()">
+            <i nz-icon nzType="search" nzTheme="outline"></i> Tìm kiếm
+          </button>
+        </div>
+      </div>
+      <nz-table class="mt-5"
+      nzShowSizeChanger
+      [nzData]="listOfData"
+       [nzFrontPagination]="false"
+      [nzPageSize]="size"
+      [nzPageIndex]="page"
+      [nzTotal]="total"
+      (nzPageIndexChange)="pageChange($event)"
+      (nzQueryParams)="onQueryParamsChange($event)"
+      [nzFooter]="footer" [nzScroll]="{ x: '3500px', y: '490px' }">
+        <thead>
+          <tr>
+            <th class="text-center" nzLeft>Mã đơn hàng</th>
+            <th class="text-center" nzLeft>Mã khách hàng</th>
+            <th class="text-center">Mã loại dịch vụ</th>
+            <th class="text-center">Loại hành trình</th>
+            <th class="text-center">Loại hàng hóa</th>
+            <th class="text-center">Loại đơn</th>
+            <th class="text-center">Mã bưu cục nhận</th>
+            <th class="text-center">Mã tỉnh nhận</th>
+            <th class="text-center">Mã bưu cục giao</th>
+            <th class="text-center">Tỉnh giao</th>
+            <th class="text-center">Loại địa chỉ</th>
+            <th class="text-center" > Khoảng cách tỉnh giao --> TTKT </th>
+            <th class="text-center">Thời gian lấy hàng thành công</th>
+            <th class="text-center">Thời gian thay đổi TT giao lần đầu tiên</th>
+            <th class="text-center">Thời gian toàn trình thực tế</th>
+            <th class="text-center">Thời gian toàn trình chỉ tiêu</th>
+            <th class="text-center">Chênh lệch</th>
+            <th class="text-center">Trạng thái đơn</th>
+            <th class="text-center"  nzRight>Kết quả</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of listOfData" class="fixrow">
+            <td class="with-table fixcolumn" nzLeft>{{ data.maPhieuGui ? data.maPhieuGui : "-" }}</td>
+            <td class="text-center fixcolumn" nzLeft>{{ data.maKhGui ? data.maKhGui : "-" }}</td>
+            <td class="text-center">{{ data.loaiDv ? data.loaiDv : "-" }}</td>
+            <td class="text-center"> {{ data.loaiHanhTrinh ? data.loaiHanhTrinh  : "-" }}</td>
+            <td class="text-center">{{ data.loaiHh? data.loaiHh : "-" }}</td>
+            <td class="text-center">{{ data.loaiDon ? data.loaiDon : "-" }}</td>
+            <td class="text-center"> {{ data.bcNhan ? (data.bcNhan ) : "-" }}</td>
+            <td class="text-center">{{ data.tinhNhan ? data.tinhNhan : "-" }}</td>
+            <td class="text-center">{{ data.bcGiao ? data.bcGiao : "-" }}</td>
+            <td class="text-center"> {{ data.tinhGiao ? (data.tinhGiao ) : "-" }}</td>
+            <td class="text-center">{{ data.loaiDc ? data.loaiDc : "-" }}</td>
+            <td class="text-center"> {{ data.khoangCachTtkt ? (data.khoangCachTtkt ) : "-" }}</td>
+            <td class="text-center">{{ data.thoiGianLayHangTc ? (data.thoiGianLayHangTc |textDate) : "-" }}</td>
+            <td class="text-center"> {{ data.thoiGianGiaoLanDau ? (data.thoiGianGiaoLanDau |textDate ) : "-" }}</td>
+            <td class="text-center">{{ data.thoiGianTtThucTe ? data.thoiGianTtThucTe : "-" }}</td>
+            <td class="text-center"> {{ data.thoiGianTtChiTieu ? (data.thoiGianTtChiTieu ) : "-" }}</td>
+            <td class="text-center">{{ data.chenhLech ? data.chenhLech : "-" }}</td>
+            <td class="text-center">{{ data.trangThai ? data.trangThai : "-" }}</td>
+            <td class="text-center text-center fixcolumn" nzRight><nz-tag *ngIf="(data.ketQua !== 'Đạt' && data.ketQua !== 'ĐẠT' && data.ketQua !== 'N/A')" [nzColor]="'error'">{{ data.ketQua }}</nz-tag>
+              <nz-tag *ngIf="(data.ketQua === 'Đạt'||data.ketQua === 'ĐẠT')" [nzColor]="'success'">{{ data.ketQua }}</nz-tag>
+              <nz-tag *ngIf="(data.ketQua === 'N/A')" [nzColor]="''">Chưa hoàn thành</nz-tag>
+            </td>
+          </tr>
+        </tbody>
+        <ng-template #footer>
+          <span *ngIf="total">Tổng {{ total }} bản ghi</span>
+        </ng-template>
+      </nz-table>
+    </div>
+
+</cms-page>
